@@ -1,4 +1,5 @@
 import time
+import os
 
 a_list = ['a', 'b', 'mpilgram', 'z', 'example']
 a_list1 = list((3, 5, 7, 8, 11))
@@ -69,3 +70,42 @@ for i in a_list:
         a_list.remove(i)
 
 a_list = [1, 1, 1, 1, 1]
+
+print("---------------分割-----------------")
+
+# aList = [1, 2, 3]
+# bList = [4, 5, 6]
+# cList = zip(aList, bList)
+# print(list(cList))
+# for i in enumerate(cList):
+#     print(i)
+#
+# for index, ch in enumerate('SDIBT'):
+#     print((index, ch), end=',')
+#
+
+
+aList = [x * x for x in range(10)]
+print(aList)
+
+aList = []
+for x in range(10):
+    aList.append(x * x)
+print(aList)
+
+freshfruit = [' banana', ' loganberry ', 'passion fruit ']
+aList = [w.strip() for w in freshfruit]
+print(aList)
+#
+# freshfruit = [' banana', ' loganberry ', 'passion fruit ']
+# for i in freshfruit:
+#     i = i.strip()
+#     print(i)
+
+vec = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+print([num for elem in vec for num in elem])
+
+print([filename for filename in os.listdir('.') if filename.endswith('.py')])
+
+aList = [-1, -4, 6, 7.5, -2.3, 9, -11]
+print([i for i in aList if i > 0])
