@@ -109,3 +109,32 @@ print([filename for filename in os.listdir('.') if filename.endswith('.py')])
 
 aList = [-1, -4, 6, 7.5, -2.3, 9, -11]
 print([i for i in aList if i > 0])
+
+print("---------------分割-----------------")
+
+scores = {"Zhang San": 45, "Li Si": 78, "Wang Wu": 40, "Zhou Liu": 96, "Zhao Qi": 65, "Sun Ba": 90, "Zheng Jiu": 78,
+          "Wu Shi": 99, "Dong Shiyi": 60}
+
+highest = max(scores.values())
+lowest = min(scores.values())
+print("最高分:")
+print(highest)
+print("最低分")
+print(lowest)
+
+average = sum(scores.values()) * 1.0 / len(scores)
+print("平均分")
+print(average)
+
+highestPerson = [name for name, score in scores.items() if score == highest]
+
+print(highestPerson)
+
+print([(x, y) for x in range(3) for y in range(3)])
+
+print([(x, y) for x in [1, 2, 3] for y in [3, 1, 4] if x != y])
+
+matrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+print([[row[i] for row in matrix] for i in [0, 1, 2, 3]])
+
+print(list(zip(*matrix)))
