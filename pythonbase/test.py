@@ -138,3 +138,96 @@ matrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
 print([[row[i] for row in matrix] for i in [0, 1, 2, 3]])
 
 print(list(zip(*matrix)))
+
+a = 3,
+print(a)
+print(tuple('abcdefg'))
+print(aList)
+print(tuple(aList))
+
+x, y, z = 1, 2, 3
+print(x, y, z)
+
+v_tuple = (False, 3.5, 'exp')
+x, y, z = v_tuple
+
+# 序列解包，可以用于列表和字典。默认对字典“键”进行操作，对键-值操作时，需要items()方法，对值 操作，需要使用values()方法
+a = [1, 2, 3]
+b, c, d = a
+s = {'a': 1, 'b': 2, 'c': 3}
+b, c, d = s.items()
+print("items()方法对键值对进行操作:", b, c, d)
+b, c, d = s
+print("默认方法对键进行操作:", b, c, d)
+b, c, d = s.values()
+print("values()方法对键进行操作:", b, c, d)
+
+keys = ['a', 'b', 'c', 'd']
+values = [1, 2, 3, 4]
+for k, v in zip(keys, values):
+    print((k, v))
+
+g = ((i + 2) ** 2 for i in range(10))
+print(g)
+tuple(g)
+print(g)
+g = ((i + 2) ** 2 for i in range(10))
+print(list(g))
+g = ((i + 2) ** 2 for i in range(10))
+print(g.__next__())
+print(g.__next__())
+print(g.__next__())
+print(g.__next__())
+# g = ((i + 2) ** 2 for i in range(10))
+# for i in g:
+#     print(i)
+
+a = (1, 2, 3, 4, 5)
+b = 'Hello world.'
+
+
+def demo():
+    a = 3
+    b = [1, 2, 3]
+    print('locals:', locals())
+    print('globals', globals())
+
+
+# demo()
+
+a_dict = {'server': 'db.diveintopython3.org', 'database': 'mysql'}
+print(a_dict)
+
+keys = ['a', 'b', 'c', 'd']
+values = [1, 2, 3, 4]
+
+dictionary = dict(zip(keys, values))
+
+print(dictionary)
+
+d = dict(name='Dong', age=37)
+print(d)
+
+adict = dict.fromkeys(['name', 'age', 'sex'])
+print(adict)
+
+aDict = {'name': 'Dong', 'sex': 'male', 'age': '37'}
+print(aDict.get('address'))
+print(aDict.get('address', 'SDIBT'))
+
+aDict['score'] = aDict.get('score', [])
+aDict['score'].append(98)
+aDict['score'].append(97)
+print(aDict)
+
+aDict = {'name': 'Dong', 'sex': 'male', 'age': '37'}
+for item in aDict.items():
+    print(item)
+
+for key in aDict.keys():
+    print(key)
+for key, value in aDict.items():
+    print(key, value)
+
+print(aDict.keys())
+print(aDict.values())
