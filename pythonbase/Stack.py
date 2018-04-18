@@ -1,3 +1,4 @@
+# Õ»µÄÊ¹ÓÃ
 class Stack:
     def __init__(self, size=10):
         self._content = []
