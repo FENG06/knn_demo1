@@ -94,6 +94,7 @@
           <option value="classify.k" />
           <option value="classify.labels" />
           <option value="float.argsort" />
+          <option value="types.IntType" />
         </list>
       </option>
     </inspection_tool>
