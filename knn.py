@@ -1,6 +1,8 @@
 import random
 import operator
 import datetime
+
+# import kdtree as kdtree
 import numpy as np
 import pandas as  pd
 import statsmodels.api as sm
@@ -132,7 +134,7 @@ class kdtree(object):
             other_result = self.left.knearest(point, k, dist)
 
             # 刨出来的点放在一起，选前K个
-        result.append(self.node, dist(point, self.node[0]))
+        result.append((self.node, dist(point, self.node[0])))
         result = sorted(result + other_result, key=lambda pair: pair[1])[:k]
 
         # 到停点就返回结果
@@ -159,5 +161,63 @@ class kdtree(object):
                 statistics[label] = 1
             else:
                 statistics[label] += 1
-        max_label = max(statistics.iteritems(), key=operator.itemgetter(1))[0]
+        max_label = max(statistics.items(), key=operator.itemgetter(1))[0]
         return max_label, float(statistics[max_label]) / float(len(nearests))
+
+
+# 设置样本集
+grieves = map(lambda x, y: tuple(((x, y), 'g')), grief_heigts, grief_weights)
+grieves = list(grieves)
+agnoies = map(lambda u, v: tuple(((u, v), 'b')), agony_heights, agony_weights)
+agnoies = list(agnoies)
+despairs = map(lambda a, b: tuple(((a, b), 'y')), despair_heights, despair_weights)
+despairs = list(despairs)
+# 创建kd树
+tree = kdtree(list(np.concatenate((grieves, agnoies, despairs))))
+
+# 穷举生成空间上的点
+all_points = []
+for i in range(100, 701):
+    for j in range(100, 701):
+        all_points.append((float(i) / 10., float(j) / 100.))  # 一共是36万个点
+len(all_points)
+
+
+# 设置归一化距离函数
+def normalized_dist(x, y):
+    return (x[0] - y[0]) ** 2 + (10 * x[1] - 10 * y[1]) ** 2
+
+
+# 每个点运算15NN，并记录运算时间
+now = datetime.datetime.now()
+fifteen_NN_result = []
+for point in all_points:
+    fifteen_NN_result.append((point, tree.kNN(point, k=15, dist=normalized_dist)))
+print(datetime.datetime.now() - now)
+
+# 把每个颜色的数据分开
+fifteen_NN_yellow = []
+fifteen_NN_green = []
+fifteen_NN_blue = []
+
+for pair in fifteen_NN_result:
+    if pair[1] == 'y':
+        fifteen_NN_yellow.append(pair[0])
+    if pair[1] == 'y':
+        fifteen_NN_green.append(pair[0])
+    if pair[1] == 'y':
+        fifteen_NN_blue.append(pair[0])
+
+plt.scatter(40, 2.7, c='r', s=200, marker='*', alpha=0.8, zorder=10)
+plt.scatter(grief_heigts, grief_weights, c='g', marker='s', s=50, alpha=0.8, zorder=10)
+plt.scatter(agony_heights, agony_weights, c='b', marker='^', s=50, alpha=0.8, zorder=10)
+plt.scatter(despair_heights, despair_weights, c='y', s=50, alpha=0.8, zorder=10)
+plt.scatter([x[0] for x in fifteen_NN_yellow], [x[1] for x in fifteen_NN_yellow], s=1, c='yellow', marker='1',
+            alpha=0.3)
+plt.scatter([x[0] for x in fifteen_NN_blue], [x[1] for x in fifteen_NN_blue], s=1, c='blue', marker='2', alpha=0.3)
+plt.scatter([x[0] for x in fifteen_NN_green], [x[1] for x in fifteen_NN_green], s=1, c='green', marker='3', alpha=0.3)
+plt.axis((10, 70, 1, 7))
+plt.title('15NN分类', size=30)
+plt.xlabel('身高 (cm)', size=15)
+plt.ylabel('体重 (kg)', size=15)
+plt.show()
