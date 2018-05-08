@@ -225,5 +225,45 @@ plt.axis((10, 70, 1, 7))
 plt.title('15NN分类', size=30)
 plt.xlabel('身高 (cm)', size=15)
 plt.ylabel('体重 (kg)', size=15)
-print('测试一下')
+# plt.show()
+
+
+# 每个点计算1NN，并记录计算时间
+now = datetime.datetime.now()
+one_NN_result = []
+for point in all_points:
+    one_NN_result.append((point, tree.kNN(point, k=1, dist=lambda x, y: (x[0] - y[0]) ** 2 +
+                                                                        (10 * x[1] - 10 * y[1]) ** 2)[0]))
+print(datetime.datetime.now() - now)
+
+# 把每个颜色的数据分开
+one_NN_yellow = []
+one_NN_green = []
+one_NN_blue = []
+
+for pair in one_NN_result:
+    if pair[1] == 'y':
+        one_NN_yellow.append(pair[0])
+
+    if pair[1] == 'g':
+        one_NN_green.append(pair[0])
+
+    if pair[1] == 'b':
+        one_NN_blue.append(pair[0])
+
+plt.scatter(40, 2.7, c='r', s=200, marker='*', alpha=0.8, zorder=10)
+plt.scatter(grief_heigts, grief_weights, c='g', marker='s', s=50, alpha=0.8, zorder=10)
+plt.scatter(agony_heights, agony_weights, c='b', marker='^', s=50, alpha=0.8, zorder=10)
+plt.scatter(despair_heights, despair_weights, c='b', s=50, alpha=0.8, zorder=10)
+
+plt.scatter([x[0] for x in one_NN_yellow], [x[1] for x in one_NN_yellow], s=1, c='yellow',
+            marker='1', alpha=0.3)
+plt.scatter([x[0] for x in one_NN_blue], [x[1] for x in one_NN_blue], s=1, c='blue',
+            marker='2', alpha=0.3)
+plt.scatter([x[0] for x in one_NN_green], [x[1] for x in one_NN_green], s=1, c='green',
+            marker='3', alpha=0.3)
+plt.axis(10, 70, 1, 7)
+plt.title('1NN分类', size=10)
+plt.xlabel('身高(cm)', size=8)
+plt.xlabel('体重(kg)', size=8)
 plt.show()
