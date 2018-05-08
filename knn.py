@@ -10,16 +10,16 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 # 100个正态分布的悲伤
-grief_heigts = np.random.normal(50, 6, 100)
-grief_weights = np.random.normal(5, 0.5, 100)
+grief_heigts = np.random.normal(50, 6, 10)
+grief_weights = np.random.normal(5, 0.5, 10)
 
 # 100个正态分布的痛苦
-agony_heights = np.random.normal(30, 6, 100)
-agony_weights = np.random.normal(4, 0.5, 100)
+agony_heights = np.random.normal(30, 6, 10)
+agony_weights = np.random.normal(4, 0.5, 10)
 
 # 100个正态分布的绝望
-despair_heights = np.random.normal(45, 6, 100)
-despair_weights = np.random.normal(2.5, 0.5, 100)
+despair_heights = np.random.normal(45, 6, 10)
+despair_weights = np.random.normal(2.5, 0.5, 10)
 
 # 设置图片大小
 fig_size = plt.rcParams["figure.figsize"]
@@ -39,8 +39,13 @@ plt.axis((10, 70, 1, 7))
 plt.xlabel('身高(cm)', size=15)
 plt.ylabel('体重(kg)', size=15)
 
+plt.show()
 
-# plt.show()
+
+def createDataSet():
+    group = np.array([[1.0, 0.9], [1.0, 1.0], [0.1, 0.2], [0.0, 0.1]])
+    labels1 = ['A', 'A', 'B', 'B']  # four samples and two classes
+    return group, labels1
 
 
 class kdtree(object):
@@ -192,7 +197,7 @@ def normalized_dist(x, y):
 now = datetime.datetime.now()
 fifteen_NN_result = []
 for point in all_points:
-    fifteen_NN_result.append((point, tree.kNN(point, k=15, dist=normalized_dist)))
+    fifteen_NN_result.append((point, tree.kNN(point, k=15, dist=normalized_dist)[0]))
 print(datetime.datetime.now() - now)
 
 # 把每个颜色的数据分开
@@ -220,4 +225,5 @@ plt.axis((10, 70, 1, 7))
 plt.title('15NN分类', size=30)
 plt.xlabel('身高 (cm)', size=15)
 plt.ylabel('体重 (kg)', size=15)
+print('测试一下')
 plt.show()
