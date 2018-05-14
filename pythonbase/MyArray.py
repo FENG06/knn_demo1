@@ -1,4 +1,6 @@
 import types
+# from __builtin__ import long
+from numpy import long
 
 
 class MyArray:
@@ -7,8 +9,8 @@ class MyArray:
     __size = 0
 
     def __IsNumber(self, n):
-        if type(n) != types.ComplexType and type(n) != types.FloatType \
-                and type(n) != types.IntType and type(n) != types.LongType:
+        if type(n) != int and type(n) != float \
+                and type(n) != complex and type(n) != long:
             return False
         return True
 
@@ -31,3 +33,5 @@ class MyArray:
             b.__value.append(v + n)
             return b
 
+    def __len__(self):
+        return len(self.__value)
